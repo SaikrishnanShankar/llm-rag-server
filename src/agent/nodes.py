@@ -18,7 +18,7 @@ from __future__ import annotations
 import logging
 import time
 from functools import lru_cache
-from typing import Any, Dict, List, Optional
+from typing import Any, Dict, List
 
 from src.agent.state import AgentState
 from src.config import settings

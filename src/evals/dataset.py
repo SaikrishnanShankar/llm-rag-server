@@ -9,11 +9,10 @@ the full RAG pipeline, then evaluate those results against ground_truth.
 """
 from __future__ import annotations
 
-import asyncio
 import json
 import logging
 from pathlib import Path
-from typing import List, Optional
+from typing import Optional
 
 from tqdm import tqdm
 

@@ -3,10 +3,9 @@ Generate a markdown report comparing chunking strategies across RAGAS metrics.
 """
 from __future__ import annotations
 
-import json
 from datetime import datetime
 from pathlib import Path
-from typing import Dict, List
+from typing import Dict
 
 
 def generate_report(results: Dict[str, Dict], output_path: Path) -> str:

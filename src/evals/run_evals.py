@@ -64,7 +64,7 @@ async def _evaluate_strategy(
             context_precision,
             faithfulness,
         )
-        from langchain_openai import ChatOpenAI, OpenAIEmbeddings
+        from langchain_openai import ChatOpenAI
         from src.config import settings
 
         # Configure RAGAS to use the same vLLM endpoint (or mock)

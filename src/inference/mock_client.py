@@ -10,8 +10,7 @@ from __future__ import annotations
 
 import asyncio
 import re
-import time
-from typing import AsyncIterator, List, Optional
+from typing import AsyncIterator, List
 
 
 class MockCompletionResponse:

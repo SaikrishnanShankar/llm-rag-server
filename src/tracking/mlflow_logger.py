@@ -12,8 +12,7 @@ comparison view across runs.
 from __future__ import annotations
 
 import logging
-from contextlib import contextmanager
-from typing import Any, Dict, Optional
+from typing import Optional
 
 import mlflow
 

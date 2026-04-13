@@ -3,7 +3,6 @@ FastAPI route handlers for /query, /ingest, /eval, /health.
 """
 from __future__ import annotations
 
-import asyncio
 import json
 import logging
 import time
@@ -146,14 +145,11 @@ async def query_stream(request: QueryRequest):
     Uses the same LangGraph routing but streams the generation step.
     """
     from src.inference.vllm_client import (
-        build_direct_messages,
         build_rag_messages,
         generate_stream,
     )
     from src.retrieval.embeddings import embed_query
     from src.retrieval.vectorstore import similarity_search
-
-    strategy = request.chunk_strategy or settings.default_chunk_strategy
 
     async def _generate() -> AsyncIterator[str]:
         ACTIVE_REQUESTS.inc()
@@ -215,7 +211,6 @@ async def ingest_file(
 ):
     """Upload and ingest a .txt or .pdf file."""
     import hashlib
-    from src.retrieval.ingest import load_pdf, load_txt
 
     content = await file.read()
     filename = file.filename or "upload"

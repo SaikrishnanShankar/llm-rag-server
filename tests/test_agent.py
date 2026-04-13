@@ -5,9 +5,7 @@ All external I/O (vectorstore, vLLM) is patched so tests are fast and
 hermetic. This validates routing logic and node contracts, not retrieval
 quality.
 """
-import asyncio
 import pytest
-from unittest.mock import AsyncMock, MagicMock, patch
 
 
 # ─── classify_query ───────────────────────────────────────────────────────────

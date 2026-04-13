@@ -4,7 +4,6 @@ Integration tests for vectorstore insert + search round-trip.
 Requires a running PostgreSQL with pgvector on DATABASE_URL.
 Skipped automatically when the DB is unavailable (CI without a DB service).
 """
-import json
 import os
 import pytest
 import numpy as np
