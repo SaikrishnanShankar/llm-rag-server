@@ -1,0 +1,53 @@
+MLOps and Production ML Deployment
+
+MLOps Overview
+
+MLOps (Machine Learning Operations) combines machine learning, DevOps, and data engineering practices to deploy and maintain ML systems in production reliably and efficiently. It addresses the unique challenges of ML systems including data dependencies, model versioning, performance monitoring, and the need for continuous retraining.
+
+The ML Development Lifecycle
+The ML lifecycle consists of several interconnected phases. Data collection and validation ensure training data quality and representativeness. Feature engineering transforms raw data into model inputs. Model training optimizes model parameters on historical data. Model evaluation validates performance on held-out data. Model deployment makes the model available for predictions. Monitoring tracks model performance over time. Retraining updates the model as data distributions shift.
+
+Key MLOps Principles
+Reproducibility ensures experiments can be replicated exactly. Version control tracks changes to data, code, and models. Automation reduces manual steps in the ML pipeline. Continuous integration validates changes before deployment. Continuous delivery automates model deployment. Monitoring detects performance degradation and data drift.
+
+Containerization with Docker
+
+Docker packages applications and their dependencies into portable containers. Containers ensure consistent behavior across development, testing, and production environments. A Dockerfile defines the container image: base image selection, dependency installation, code copying, and entrypoint configuration.
+
+Docker best practices for ML include using slim base images to reduce size, caching dependency installation layers separately from code, pre-downloading large model files during build time, and using multi-stage builds to separate build and runtime dependencies. docker-compose orchestrates multiple services (API, database, monitoring) for local development.
+
+Container Orchestration
+Kubernetes orchestrates containers at scale. Key concepts include pods (groups of containers), deployments (declarative pod management), services (stable networking), and ingress (external access). For ML workloads, Kubernetes supports GPU scheduling, horizontal pod autoscaling based on custom metrics, and node affinity for placing GPU workloads on appropriate hardware.
+
+Model Serving Infrastructure
+
+Model serving systems expose ML models as services that accept prediction requests. Requirements include low latency (typically <100ms for interactive applications), high throughput (handling concurrent requests), reliability (99.9%+ uptime), and scalability (handling load spikes).
+
+REST APIs using frameworks like FastAPI provide simple HTTP interfaces. Async request handling with Python's asyncio and ASGI servers like Uvicorn enables handling many concurrent requests without blocking. Streaming responses using Server-Sent Events allow progressive token generation for LLMs.
+
+Monitoring and Observability
+
+Prometheus is an open-source monitoring system that collects metrics from services via HTTP scraping. Metrics types include counters (monotonically increasing values like request count), gauges (values that can increase or decrease like active connections), histograms (distributions of values like request latency), and summaries (similar to histograms with client-side quantiles).
+
+Grafana visualizes metrics stored in Prometheus (and other backends). Dashboards combine multiple panels showing different metrics. Alerts trigger notifications when metrics exceed thresholds. For ML systems, key metrics include request latency percentiles (p50, p95, p99), throughput (requests per second), error rate, model inference time, and business metrics like prediction quality.
+
+Data and Model Drift
+Data drift occurs when the statistical properties of the input data change over time compared to the training data. Concept drift occurs when the relationship between inputs and outputs changes. Detection methods include statistical tests (Kolmogorov-Smirnov, Population Stability Index), monitoring summary statistics, and tracking model performance metrics. When drift is detected, the model may need retraining.
+
+Feature Stores
+
+Feature stores centralize feature computation and storage, ensuring consistency between training and serving. Offline feature stores handle batch feature computation for training. Online feature stores provide low-latency feature retrieval for serving. Popular feature stores include Feast, Tecton, and Vertex AI Feature Store. Feature versioning enables point-in-time correct feature retrieval for training, preventing data leakage.
+
+Experiment Tracking
+
+Experiment tracking records the parameters, metrics, and artifacts of ML experiments to enable comparison and reproduction. MLflow provides comprehensive experiment tracking with a web UI, Python SDK, and REST API. Each run logs parameters (hyperparameters, configurations), metrics (loss curves, evaluation scores), artifacts (model files, plots), and tags (metadata). Experiments group related runs for comparison. The Model Registry tracks model versions and their lifecycle (staging, production, archived).
+
+CI/CD for ML
+
+Continuous Integration for ML validates data quality, runs unit and integration tests, and evaluates model performance on test sets. Continuous Deployment automatically promotes models that pass evaluation criteria. GitHub Actions, GitLab CI, and Jenkins are common CI/CD platforms. Testing ML code requires testing data processing functions, model interfaces, and prediction sanity checks. Automated evaluation compares new model versions against baseline performance.
+
+GPU Computing and PACE
+
+High-performance computing clusters like Georgia Tech's PACE (Partnership for an Advanced Computing Environment) provide GPU resources for large-scale ML training and inference. Job schedulers like SLURM allocate GPU resources to jobs. Efficient GPU utilization requires batching requests, minimizing data transfer between CPU and GPU memory, and using optimized kernels (cuDNN, NCCL for distributed training).
+
+vLLM on GPU clusters leverages tensor parallelism to split large models across multiple GPUs and pipeline parallelism to process multiple batches simultaneously. PagedAttention efficiently manages the KV cache in GPU memory, enabling higher throughput by reducing memory fragmentation. Swapping the inference endpoint from a local mock to a production vLLM server requires only changing the VLLM_BASE_URL environment variable when using an OpenAI-compatible client.

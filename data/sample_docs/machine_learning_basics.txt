@@ -1,0 +1,46 @@
+Machine Learning Fundamentals
+
+Machine learning is a subset of artificial intelligence that enables systems to learn and improve from experience without being explicitly programmed. It focuses on developing computer programs that can access data and use it to learn for themselves.
+
+Types of Machine Learning
+
+Supervised Learning
+Supervised learning uses labeled training data to learn a mapping function from inputs to outputs. The algorithm learns from the training dataset by iteratively making predictions on the training data and being corrected by the teacher. Common algorithms include linear regression, logistic regression, support vector machines, decision trees, and neural networks. Applications include spam detection, image classification, and medical diagnosis.
+
+Unsupervised Learning
+Unsupervised learning finds hidden patterns in data without pre-existing labels. The system tries to learn the structure of the data itself. Clustering algorithms like K-means and DBSCAN group similar data points together. Dimensionality reduction techniques like PCA and t-SNE reduce the number of features while preserving important information. Applications include customer segmentation, anomaly detection, and recommendation systems.
+
+Reinforcement Learning
+Reinforcement learning trains agents to make decisions by maximizing cumulative rewards. An agent interacts with an environment, observes states, takes actions, and receives rewards or penalties. Key concepts include the Markov Decision Process, Q-learning, and policy gradient methods. Applications include game playing (AlphaGo, OpenAI Five), robotics, and autonomous driving.
+
+Neural Networks and Deep Learning
+
+Artificial neural networks are computing systems inspired by biological neural networks. They consist of layers of interconnected nodes (neurons) that process information using connectionist approaches to computation. Deep learning uses neural networks with many layers (deep neural networks) to learn hierarchical representations of data.
+
+Convolutional Neural Networks (CNNs) are specialized for processing grid-like data such as images. They use convolutional layers to automatically learn spatial hierarchies of features. CNNs have revolutionized computer vision tasks including image recognition, object detection, and image segmentation.
+
+Recurrent Neural Networks (RNNs) are designed for sequential data processing. They maintain hidden state that captures information about previous inputs. Long Short-Term Memory (LSTM) networks address the vanishing gradient problem in standard RNNs. Applications include natural language processing, speech recognition, and time series prediction.
+
+Transformer architectures have become dominant in natural language processing. They use self-attention mechanisms to process entire sequences simultaneously rather than sequentially. BERT, GPT, and their variants have achieved state-of-the-art performance on numerous NLP benchmarks.
+
+Model Evaluation and Validation
+
+Cross-validation is a technique for evaluating model performance on unseen data. K-fold cross-validation splits the data into k subsets, training on k-1 folds and validating on the remaining fold, repeating k times. This provides a more robust estimate of model performance than a single train-test split.
+
+Common evaluation metrics include accuracy, precision, recall, F1-score for classification tasks, and mean squared error, mean absolute error, R-squared for regression tasks. The choice of metric depends on the specific problem and business requirements.
+
+Overfitting occurs when a model learns the training data too well, including its noise and outliers, resulting in poor performance on new data. Techniques to prevent overfitting include regularization (L1, L2), dropout, early stopping, and data augmentation.
+
+Feature Engineering and Selection
+
+Feature engineering is the process of using domain knowledge to create features that make machine learning algorithms work better. Good features can significantly improve model performance. Feature selection reduces the number of input variables to simplify the model, improve performance, and reduce overfitting.
+
+Common feature engineering techniques include normalization and standardization, one-hot encoding for categorical variables, polynomial feature creation, and interaction terms. Feature importance can be assessed using methods like SHAP values, permutation importance, and built-in tree-based feature importance.
+
+Hyperparameter Tuning
+
+Hyperparameters are parameters set before the learning process begins, unlike model parameters learned during training. Examples include learning rate, number of layers, number of neurons per layer, and regularization strength. Grid search exhaustively tries all combinations of specified hyperparameter values. Random search samples random combinations, which is often more efficient. Bayesian optimization uses probabilistic models to find optimal hyperparameters more efficiently.
+
+Production ML Systems
+
+Deploying machine learning models to production involves several challenges beyond model development. Model serving infrastructure must handle concurrent requests with low latency. Monitoring systems track model performance degradation over time (model drift). Data pipelines must reliably deliver fresh training and inference data. Feature stores provide consistent feature computation across training and serving. MLOps practices combine ML and DevOps to streamline the ML lifecycle.

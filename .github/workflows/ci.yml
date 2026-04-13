@@ -1,0 +1,135 @@
+name: CI
+
+on:
+  push:
+    branches: [main, dev]
+  pull_request:
+    branches: [main]
+
+jobs:
+  # ── Job 1: unit tests (no DB, no GPU) ──────────────────────────────────────
+  unit-tests:
+    name: Unit Tests (Python ${{ matrix.python-version }})
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: ["3.11"]
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+          cache: pip
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Lint (ruff)
+        run: |
+          pip install ruff -q
+          ruff check src/ tests/ --select E,F,W --ignore E501
+
+      - name: Run unit + agent tests (no DB)
+        env:
+          SKIP_DB_TESTS: "true"
+          VLLM_BASE_URL: "mock://local"
+          DATABASE_URL: "postgresql://raguser:ragpassword@localhost:5433/ragdb"
+          MLFLOW_TRACKING_URI: "http://localhost:5001"
+        run: pytest tests/test_chunking.py tests/test_agent.py -v --tb=short
+
+  # ── Job 2: integration tests (pgvector service) ────────────────────────────
+  integration-tests:
+    name: Integration Tests (pgvector)
+    runs-on: ubuntu-latest
+    needs: unit-tests
+
+    services:
+      postgres:
+        image: pgvector/pgvector:pg16
+        env:
+          POSTGRES_DB: ragdb
+          POSTGRES_USER: raguser
+          POSTGRES_PASSWORD: ragpassword
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd "pg_isready -U raguser -d ragdb"
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Run integration tests (vectorstore)
+        env:
+          DATABASE_URL: "postgresql://raguser:ragpassword@localhost:5432/ragdb"
+          VLLM_BASE_URL: "mock://local"
+          MLFLOW_TRACKING_URI: "http://localhost:5001"
+          SKIP_DB_TESTS: "false"
+        run: pytest tests/test_vectorstore.py -v --tb=short
+
+  # ── Job 3: eval smoke test (mock LLM, 3 questions) ─────────────────────────
+  eval-smoke:
+    name: Eval Smoke Test
+    runs-on: ubuntu-latest
+    needs: integration-tests
+
+    services:
+      postgres:
+        image: pgvector/pgvector:pg16
+        env:
+          POSTGRES_DB: ragdb
+          POSTGRES_USER: raguser
+          POSTGRES_PASSWORD: ragpassword
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd "pg_isready -U raguser -d ragdb"
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Ingest sample docs (sentence strategy)
+        env:
+          DATABASE_URL: "postgresql://raguser:ragpassword@localhost:5432/ragdb"
+          VLLM_BASE_URL: "mock://local"
+          MLFLOW_TRACKING_URI: "http://localhost:5001"
+        run: python -m src.retrieval.ingest --docs-dir data/sample_docs --strategy sentence
+
+      - name: Run eval smoke test (3 questions, sentence only)
+        env:
+          DATABASE_URL: "postgresql://raguser:ragpassword@localhost:5432/ragdb"
+          VLLM_BASE_URL: "mock://local"
+          MLFLOW_TRACKING_URI: "http://localhost:5001"
+        run: python -m src.evals.run_evals --strategies sentence --limit 3
+
+      - name: Upload eval results
+        uses: actions/upload-artifact@v4
+        with:
+          name: eval-results
+          path: eval/results/

@@ -1,0 +1,252 @@
+[
+  {
+    "question": "What is supervised learning and what are some common algorithms used in it?",
+    "ground_truth": "Supervised learning uses labeled training data to learn a mapping function from inputs to outputs. Common algorithms include linear regression, logistic regression, support vector machines, decision trees, and neural networks.",
+    "category": "ml_basics"
+  },
+  {
+    "question": "How does unsupervised learning differ from supervised learning?",
+    "ground_truth": "Unsupervised learning finds hidden patterns in data without pre-existing labels, while supervised learning uses labeled training data. Unsupervised methods include clustering and dimensionality reduction.",
+    "category": "ml_basics"
+  },
+  {
+    "question": "What is reinforcement learning and what are its key concepts?",
+    "ground_truth": "Reinforcement learning trains agents to make decisions by maximizing cumulative rewards. Key concepts include the Markov Decision Process, Q-learning, and policy gradient methods.",
+    "category": "ml_basics"
+  },
+  {
+    "question": "What are Convolutional Neural Networks and what are they used for?",
+    "ground_truth": "CNNs are specialized neural networks for processing grid-like data such as images. They use convolutional layers to automatically learn spatial hierarchies of features and are used for image recognition, object detection, and image segmentation.",
+    "category": "ml_basics"
+  },
+  {
+    "question": "What is the transformer architecture and why is it important?",
+    "ground_truth": "Transformer architectures use self-attention mechanisms to process entire sequences simultaneously. They have become dominant in natural language processing, with models like BERT and GPT achieving state-of-the-art performance.",
+    "category": "llm_rag"
+  },
+  {
+    "question": "What is Retrieval-Augmented Generation (RAG) and how does it work?",
+    "ground_truth": "RAG combines LLMs with information retrieval. Documents are chunked, embedded, and stored in a vector database. At query time, relevant chunks are retrieved and provided as context to the LLM along with the original query.",
+    "category": "llm_rag"
+  },
+  {
+    "question": "What is pgvector and how is it used for RAG systems?",
+    "ground_truth": "pgvector is a PostgreSQL extension that supports efficient similarity search over high-dimensional embedding vectors. It uses approximate nearest neighbor algorithms like IVFFlat for fast retrieval.",
+    "category": "llm_rag"
+  },
+  {
+    "question": "What are the different chunking strategies for RAG and how do they differ?",
+    "ground_truth": "Fixed-size chunking splits at regular intervals. Sentence-based chunking preserves sentence boundaries. Semantic chunking uses embedding similarity to find natural topic boundaries. Each involves tradeoffs between speed and chunk quality.",
+    "category": "llm_rag"
+  },
+  {
+    "question": "What is RAGAS and what metrics does it measure?",
+    "ground_truth": "RAGAS is a framework for evaluating RAG pipelines. Key metrics include faithfulness (whether answers are supported by context), context relevance (whether retrieved chunks are relevant), and answer relevance (whether the answer addresses the query).",
+    "category": "llm_rag"
+  },
+  {
+    "question": "What is vLLM and what are its key innovations?",
+    "ground_truth": "vLLM is a high-throughput LLM inference library. Key innovations include PagedAttention for efficient KV cache memory management and continuous batching to maximize GPU utilization.",
+    "category": "llm_rag"
+  },
+  {
+    "question": "What is LangGraph and how does it extend LangChain?",
+    "ground_truth": "LangGraph extends LangChain with graph-based agent workflows for stateful multi-actor applications. Nodes represent computation steps, edges define flow, and state is passed between nodes. It supports cycles, conditional routing, and parallel execution.",
+    "category": "llm_rag"
+  },
+  {
+    "question": "What is MLflow and what does it track?",
+    "ground_truth": "MLflow is an open-source platform for managing the ML lifecycle. It tracks experiments by logging parameters, metrics, and artifacts. The Model Registry stores and versions models.",
+    "category": "mlops"
+  },
+  {
+    "question": "What is overfitting and how can it be prevented?",
+    "ground_truth": "Overfitting occurs when a model learns training data too well including noise, resulting in poor performance on new data. Prevention techniques include regularization (L1, L2), dropout, early stopping, and data augmentation.",
+    "category": "ml_basics"
+  },
+  {
+    "question": "What is cross-validation and why is it used?",
+    "ground_truth": "Cross-validation evaluates model performance on unseen data. K-fold cross-validation splits data into k subsets, training on k-1 folds and validating on the remaining fold. It provides a more robust performance estimate than a single train-test split.",
+    "category": "ml_basics"
+  },
+  {
+    "question": "What is feature engineering and why is it important?",
+    "ground_truth": "Feature engineering uses domain knowledge to create features that improve ML algorithm performance. Techniques include normalization, one-hot encoding, polynomial feature creation, and interaction terms.",
+    "category": "ml_basics"
+  },
+  {
+    "question": "What is Docker and why is it used in ML systems?",
+    "ground_truth": "Docker packages applications and dependencies into portable containers that ensure consistent behavior across environments. For ML, it enables reproducible deployments and simplifies dependency management.",
+    "category": "mlops"
+  },
+  {
+    "question": "What is MLOps and what challenges does it address?",
+    "ground_truth": "MLOps combines machine learning, DevOps, and data engineering to deploy and maintain ML systems reliably. It addresses challenges including data dependencies, model versioning, performance monitoring, and continuous retraining.",
+    "category": "mlops"
+  },
+  {
+    "question": "What is Prometheus and how is it used for monitoring ML systems?",
+    "ground_truth": "Prometheus is an open-source monitoring system that collects metrics via HTTP scraping. Metric types include counters, gauges, and histograms. For ML systems, it tracks request latency, throughput, error rates, and model performance.",
+    "category": "mlops"
+  },
+  {
+    "question": "What is data drift and how is it detected?",
+    "ground_truth": "Data drift occurs when statistical properties of input data change over time compared to training data. Detection methods include statistical tests like Kolmogorov-Smirnov, monitoring summary statistics, and tracking model performance metrics.",
+    "category": "mlops"
+  },
+  {
+    "question": "What is hyperparameter tuning and what methods are used?",
+    "ground_truth": "Hyperparameter tuning optimizes parameters set before training. Methods include grid search (exhaustive), random search (more efficient sampling), and Bayesian optimization (uses probabilistic models to find optimal values efficiently).",
+    "category": "ml_basics"
+  },
+  {
+    "question": "What is reranking in RAG systems and why is it useful?",
+    "ground_truth": "Reranking applies a more sophisticated model to reorder candidate chunks after initial retrieval. Cross-encoder models consider both query and document together for higher quality scoring, significantly improving answer quality at the cost of added latency.",
+    "category": "llm_rag"
+  },
+  {
+    "question": "What are embedding models and how do they compare?",
+    "ground_truth": "Embedding models convert text to dense vector representations. Sentence-transformers like all-MiniLM-L6-v2 produce 384-dimensional embeddings. Larger models produce higher-dimensional embeddings with better quality but more compute requirements.",
+    "category": "llm_rag"
+  },
+  {
+    "question": "What is Kubernetes and how does it support ML workloads?",
+    "ground_truth": "Kubernetes orchestrates containers at scale. For ML workloads, it supports GPU scheduling, horizontal pod autoscaling based on custom metrics, and node affinity for placing GPU workloads on appropriate hardware.",
+    "category": "mlops"
+  },
+  {
+    "question": "What is HyDE in the context of RAG systems?",
+    "ground_truth": "HyDE (Hypothetical Document Embeddings) generates a hypothetical answer to the query and uses its embedding for retrieval rather than the query itself, often improving retrieval relevance.",
+    "category": "llm_rag"
+  },
+  {
+    "question": "What are the limitations of large language models?",
+    "ground_truth": "LLM limitations include knowledge cutoff (only know training data), hallucination (generating plausible but incorrect information), context limitations (cannot directly access information beyond context window), and static knowledge without real-time access.",
+    "category": "llm_rag"
+  },
+  {
+    "question": "What is a feature store and what problem does it solve?",
+    "ground_truth": "Feature stores centralize feature computation and storage, ensuring consistency between training and serving. Offline stores handle batch computation for training; online stores provide low-latency retrieval for serving.",
+    "category": "mlops"
+  },
+  {
+    "question": "How does continuous integration work for ML systems?",
+    "ground_truth": "CI for ML validates data quality, runs unit and integration tests, and evaluates model performance on test sets. Testing ML code requires validating data processing functions, model interfaces, and prediction sanity checks.",
+    "category": "mlops"
+  },
+  {
+    "question": "What is PagedAttention in vLLM?",
+    "ground_truth": "PagedAttention is vLLM's innovation for managing attention key-value cache memory efficiently. It reduces memory fragmentation, enabling much higher throughput than naive KV cache implementations.",
+    "category": "llm_rag"
+  },
+  {
+    "question": "What is RLHF and how is it used in LLM training?",
+    "ground_truth": "Reinforcement Learning from Human Feedback (RLHF) aligns LLM outputs with human preferences. It involves collecting human preference data, training a reward model, and using RL to optimize the LLM to maximize the reward.",
+    "category": "llm_rag"
+  },
+  {
+    "question": "What is the difference between LSTM and standard RNNs?",
+    "ground_truth": "Long Short-Term Memory (LSTM) networks address the vanishing gradient problem in standard RNNs by using gating mechanisms to selectively remember or forget information over long sequences.",
+    "category": "ml_basics"
+  },
+  {
+    "question": "How does Grafana relate to Prometheus in monitoring?",
+    "ground_truth": "Grafana visualizes metrics stored in Prometheus and other backends. It provides dashboards combining multiple metric panels, alerts for threshold violations, and supports oncall monitoring for production systems.",
+    "category": "mlops"
+  },
+  {
+    "question": "What is model drift and how does it differ from data drift?",
+    "ground_truth": "Data drift occurs when input data statistics change over time. Concept drift occurs when the relationship between inputs and outputs changes. Both can degrade model performance and require monitoring and potential retraining.",
+    "category": "mlops"
+  },
+  {
+    "question": "How do you swap from mock to real vLLM in production?",
+    "ground_truth": "To switch from mock to real vLLM, set the VLLM_BASE_URL environment variable to the vLLM server endpoint (e.g., http://pace-node-01:8000/v1). The OpenAI-compatible client connects to the real server without any code changes.",
+    "category": "mlops"
+  },
+  {
+    "question": "What is semantic chunking and when should it be used?",
+    "ground_truth": "Semantic chunking uses embedding similarity to find natural topic boundaries in documents, producing more coherent chunks than fixed or sentence-based methods. It requires more compute but yields better retrieval quality for complex documents.",
+    "category": "llm_rag"
+  },
+  {
+    "question": "What is Byte-Pair Encoding and how is it used in LLMs?",
+    "ground_truth": "Byte-Pair Encoding (BPE) is a tokenization algorithm used in LLMs. It creates subword units by iteratively merging the most frequent pairs of characters or tokens, balancing vocabulary size with coverage of rare words.",
+    "category": "llm_rag"
+  },
+  {
+    "question": "What metrics are commonly tracked for production ML APIs?",
+    "ground_truth": "Common production ML API metrics include request latency percentiles (p50, p95, p99), throughput (requests per second), error rate, model inference time, active connections, and business metrics like prediction quality scores.",
+    "category": "mlops"
+  },
+  {
+    "question": "What is tensor parallelism in the context of LLM serving?",
+    "ground_truth": "Tensor parallelism splits large LLM models across multiple GPUs by partitioning weight matrices. vLLM uses tensor parallelism on GPU clusters like PACE to serve models too large to fit on a single GPU.",
+    "category": "llm_rag"
+  },
+  {
+    "question": "What is query decomposition in RAG?",
+    "ground_truth": "Query decomposition breaks complex questions into simpler sub-questions, retrieves context for each sub-question separately, and combines the results. This improves handling of multi-hop questions requiring information from multiple sources.",
+    "category": "llm_rag"
+  },
+  {
+    "question": "How does the IVFFlat index work in pgvector?",
+    "ground_truth": "IVFFlat (Inverted File with Flat quantization) is an approximate nearest neighbor index. It partitions vectors into lists during training, then searches only the nearest lists at query time, trading small accuracy loss for significantly faster search.",
+    "category": "llm_rag"
+  },
+  {
+    "question": "What is SHAP and how is it used in ML?",
+    "ground_truth": "SHAP (SHapley Additive exPlanations) values quantify each feature's contribution to a model prediction based on game theory concepts. It is used for feature importance analysis and model interpretability.",
+    "category": "ml_basics"
+  },
+  {
+    "question": "What is the PACE cluster at Georgia Tech?",
+    "ground_truth": "PACE (Partnership for an Advanced Computing Environment) is Georgia Tech's high-performance computing cluster providing GPU resources for large-scale ML training and inference. It uses SLURM for job scheduling and GPU resource allocation.",
+    "category": "mlops"
+  },
+  {
+    "question": "What is self-RAG?",
+    "ground_truth": "Self-RAG teaches models to adaptively retrieve and critique their own outputs. The model decides when retrieval is needed, retrieves relevant passages, generates answers, and evaluates whether the answer is supported by retrieved evidence.",
+    "category": "llm_rag"
+  },
+  {
+    "question": "What is the role of chunk overlap in fixed-size chunking?",
+    "ground_truth": "Chunk overlap ensures that information at chunk boundaries is not lost. Overlapping consecutive chunks preserves context that spans boundary points, improving retrieval of information that straddles the split point.",
+    "category": "llm_rag"
+  },
+  {
+    "question": "How does continuous deployment work for ML models?",
+    "ground_truth": "CD for ML automatically promotes models that pass evaluation criteria to production. This includes comparing new model performance against baseline, running integration tests, and deploying via container orchestration platforms.",
+    "category": "mlops"
+  },
+  {
+    "question": "What is a ColBERT model?",
+    "ground_truth": "ColBERT is a late-interaction retrieval model that provides a middle ground between bi-encoder speed and cross-encoder quality. It precomputes token embeddings for documents and performs efficient multi-vector matching at query time.",
+    "category": "llm_rag"
+  },
+  {
+    "question": "What is the purpose of layer normalization in transformers?",
+    "ground_truth": "Layer normalization stabilizes training of deep transformer networks by normalizing activations within each layer. It helps maintain consistent gradient magnitudes during backpropagation, enabling training of very deep models.",
+    "category": "llm_rag"
+  },
+  {
+    "question": "What are population stability index tests used for?",
+    "ground_truth": "Population Stability Index (PSI) is a statistical test used to detect data drift by measuring how much the distribution of a variable has shifted between reference (training) and current data. Higher PSI values indicate greater drift.",
+    "category": "mlops"
+  },
+  {
+    "question": "What is pipeline parallelism in LLM serving?",
+    "ground_truth": "Pipeline parallelism splits different layers of an LLM across multiple GPUs, allowing multiple batches to be processed simultaneously through different pipeline stages. vLLM uses this with tensor parallelism for high-throughput serving.",
+    "category": "llm_rag"
+  },
+  {
+    "question": "What are the components of an LLM context window?",
+    "ground_truth": "The context window defines the maximum tokens an LLM can process at once, including system prompt, conversation history, retrieved context chunks, and the current query. Modern LLMs support 4K to 1M token context windows.",
+    "category": "llm_rag"
+  },
+  {
+    "question": "What is Server-Sent Events (SSE) and how is it used for LLM streaming?",
+    "ground_truth": "Server-Sent Events is a protocol for servers to push data to clients over HTTP. For LLM streaming, the server sends each generated token as an SSE event, allowing clients to display responses progressively as they are generated.",
+    "category": "mlops"
+  }
+]
